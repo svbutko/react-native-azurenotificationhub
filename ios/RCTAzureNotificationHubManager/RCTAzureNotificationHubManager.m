@@ -10,10 +10,10 @@
 #import <WindowsAzureMessaging/WindowsAzureMessaging.h>
 #import "RCTAzureNotificationHubManager.h"
 
-#import "React/RCTBridge.h"
-#import "React/RCTConvert.h"
-#import "React/RCTEventDispatcher.h"
-#import "React/RCTUtils.h"
+#import <React/RCTBridge.h>
+#import <React/RCTConvert.h>
+#import <React/RCTEventDispatcher.h>
+#import <React/RCTUtils.h>
 
 // The default error code to use as the `code` property for callback error objects
 RCT_EXTERN NSString *const RCTErrorUnspecified;

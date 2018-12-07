@@ -11,12 +11,34 @@
  */
 'use strict';
 
+
+function invariant(
+    condition: mixed,
+    format: string,
+    ...args: Array<mixed>
+): void {
+  if (!condition) {
+    let error;
+    if (format === undefined) {
+      error = new Error(
+          'Minified exception occurred; use the non-minified dev environment ' +
+          'for the full error message and additional helpful warnings.',
+      );
+    } else {
+      let argIndex = 0;
+      error = new Error(format.replace(/%s/g, () => String(args[argIndex++])));
+      error.name = 'Invariant Violation';
+    }
+
+    (error: any).framesToPop = 1; // Skip invariant's own stack frame.
+    throw error;
+  }
+}
+
 import {NativeEventEmitter} from 'react-native';
 import {NativeModules} from 'react-native';
 
 const RCTAzureNotificationHubManager = NativeModules.AzureNotificationHubManager;
-const invariant = require('fbjs/lib/invariant');
-
 const PushNotificationEmitter = new NativeEventEmitter(RCTAzureNotificationHubManager);
 
 const _notifHandlers = new Map();
