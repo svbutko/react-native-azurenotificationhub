@@ -448,7 +448,8 @@ RCT_EXPORT_METHOD(register:(nonnull NSString *)deviceToken
     // Store the connection string, hub name and tags
     _connectionString = [config objectForKey:RCTAzureConnectionStringKey];
     _hubName = [config objectForKey:RCTAzureHubNameKey];
-    _tags = [config objectForKey:RCTAzureHubTags];
+    NSArray* tagsArray = [config objectForKey:RCTAzureHubTags];
+    _tags = [NSSet setWithArray:tagsArray];
 
     // Check arguments
     if (![self assertArguments:reject])
